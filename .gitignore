@@ -1,2 +1,15 @@
 results/
 gpt-lora/
+
+# VS Code settings
+.vscode/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
