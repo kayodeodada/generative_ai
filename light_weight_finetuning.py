@@ -22,7 +22,7 @@ Description of the approach:
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
 from datasets import load_dataset
-from peft import get_peft_model, LoraConfig
+from peft import get_peft_model, LoraConfig, PeftModelForSequenceClassification
 import numpy as np
 from sklearn.metrics import accuracy_score, f1_score
 
@@ -63,7 +63,7 @@ def compute_metrics(eval_pred):
 
     return {"accuracy": acc, "f1": f1}
 
-def create_trainer(base_model, train_dataset, test_dataset):
+def create_trainer(model, train_dataset, test_dataset):
     """ Train the model using the Trainer class """
     # Define the training arguments
     training_args = TrainingArguments(
@@ -78,11 +78,11 @@ def create_trainer(base_model, train_dataset, test_dataset):
 
     # Create the Trainer
     trainer = Trainer(
-        model=base_model,
+        model=model,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=test_dataset,
-        compute_metrics=compute_metrics,
+        compute_metrics=compute_metrics
     )
 
     return trainer
@@ -100,3 +100,17 @@ def create_peft_model(model):
     peft_model = get_peft_model(model, lora_config)
 
     return peft_model
+
+def load_saved_model(model, output_dir, test_dataset):
+    """ Load the saved fine-tuned model """
+    # Reload the PEFT model
+    loaded_model = PeftModelForSequenceClassification.from_pretrained(model,output_dir)
+    loaded_model.eval()
+
+    # Create trainer for evaluation
+    loaded_model_trainer = create_trainer(
+        model=loaded_model,
+        train_dataset=None,
+        test_dataset=test_dataset)
+
+    return loaded_model_trainer.evaluate()
