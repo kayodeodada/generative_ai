@@ -28,7 +28,12 @@ from sklearn.metrics import accuracy_score, f1_score
 
 def load_base_model(model_name, num_labels):
     """ Load the base model and tokenizer for fine-tuning """
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
+    model = AutoModelForSequenceClassification.from_pretrained(
+    model_name,
+    num_labels=num_labels,
+    id2label={0: "negative", 1: "positive"},
+    label2id={"negative": 0, "positive": 1})
+
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     if tokenizer.pad_token is None:
@@ -113,4 +118,18 @@ def load_saved_model(model, output_dir, test_dataset):
         train_dataset=None,
         test_dataset=test_dataset)
 
-    return loaded_model_trainer.evaluate()
+    return loaded_model_trainer.evaluate(), loaded_model
+
+def predictions(model, tokenizer_inputs):
+    """ Make predictions using the fine-tuned model """
+
+    # Move model and inputs to device
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model.to(device)
+    inputs = {k: v.to(device) for k, v in tokenizer_inputs.items()}
+
+    # Perform inference
+    outputs = model(**inputs)
+    predicted_class = np.argmax(outputs.logits.detach().numpy(), axis=-1)
+
+    return predicted_class
