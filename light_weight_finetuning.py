@@ -1,6 +1,5 @@
 """
  Lightweight Fine-Tuning for Sentiment Analysis using GPT-2
-
 Description of the approach:
 
 * PEFT technique:
@@ -64,7 +63,7 @@ def compute_metrics(eval_pred):
 
     return {"accuracy": acc, "f1": f1}
 
-def train_model(base_model, train_dataset, test_dataset):
+def create_trainer(base_model, train_dataset, test_dataset):
     """ Train the model using the Trainer class """
     # Define the training arguments
     training_args = TrainingArguments(
@@ -85,8 +84,6 @@ def train_model(base_model, train_dataset, test_dataset):
         eval_dataset=test_dataset,
         compute_metrics=compute_metrics,
     )
-
-    trainer.train()
 
     return trainer
 
