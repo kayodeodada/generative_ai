@@ -20,7 +20,8 @@ Description of the approach:
   entiment classification tasks making it a good fit in this context.
 """
 import torch
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, Trainer, TrainingArguments
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, \
+    Trainer, TrainingArguments
 from datasets import load_dataset
 from peft import get_peft_model, LoraConfig, PeftModelForSequenceClassification
 import numpy as np
