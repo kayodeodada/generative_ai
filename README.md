@@ -1,29 +1,38 @@
-## Project Introduction ##
-Applying parameter-efficient fine-tuning using the Hugging Face `peft` library
-Lightweight fine-tuning is important for adapting foundation models, because it allows you to modify foundation models for your needs without needing substantial computational resources.
+# Project Introduction  
+**Applying Parameter-Efficient Fine-Tuning using the Hugging Face `peft` Library**  
 
-This project brings together all of the essential components of a PyTorch + Hugging Face training and inference process. Specifically:
-- Loading a pre-trained model and evaluate its performance
-- Performing parameter-efficient fine tuning using the pre-trained model
-- Performing inference using the fine-tuned model and compare its performance to the original model
+Lightweight fine-tuning is a critical technique for adapting large foundation models to specific tasks without requiring significant computational resources. This project demonstrates how to implement parameter-efficient fine-tuning (PEFT) using the Hugging Face `peft` library, showcasing its efficiency and flexibility.  
 
-### Description of the approach ###
+## Key Objectives  
+1. Explore parameter-efficient techniques for adapting pre-trained models.  
+2. Evaluate the advantages of LoRA for lightweight fine-tuning.  
+3. Compare and contrast the performance of pre-trained and fine-tuned models on a sentiment analysis task. 
+---
 
-Lightweight Fine-Tuning for Sentiment Analysis using GPT-2
+## Approach Overview  
+### Lightweight Fine-Tuning for Sentiment Analysis using GPT-2  
 
-* PEFT technique:
-  LoRA (Low-Rank Adaptation) is the selected PEFT techniques since it is compatible with all models
-* Model: 
-    GPT-2 is the selected model since it is relatively small 
-    and compatible with sequence classification and LoRA
-* Evaluation approach:
+- **PEFT Technique**  
+   The project uses **Low-Rank Adaptation (LoRA)** as the PEFT method. LoRA is chosen for its compatibility with various models and its ability to efficiently adapt foundation models with minimal resource requirements.  
 
-    Evaluation will be conducted using Hugging Face's `Trainer` class which simplifies the training
-     and evaluation workflow. accuracy and F1-score are computed using `compute_metrics` function 
-    which allaows for a comparison
-    of the performance of the original model against the fine-tunned model
+- **Model**  
+   The **GPT-2** model is selected due to its relatively small size and compatibility with:  
+   - Sequence classification tasks.  
+   - Low-Rank Adaptation (LoRA) for efficient fine-tuning.  
 
-* Fine-tuning dataset:
-  The IMDb dataset from the Hugging Face `datasets` library will be used for fine-tunning. 
-  This dataset is a standard benchmark for binary s
-  entiment classification tasks making it a good fit in this context.
+- **Evaluation Metrics**  
+   Model performance will be evaluated using Hugging Face's `Trainer` class, which simplifies training and evaluation workflows. Key metrics include:  
+   - **Accuracy**: Measures the proportion of correctly predicted samples.  
+   - **F1-Score**: Balances precision and recall for a robust performance evaluation.  
+
+   These metrics enable a direct comparison between the pre-trained and fine-tuned model's effectiveness.  
+
+- **Dataset**  
+   The project utilizes the **IMDb dataset** from the Hugging Face `datasets` library. This dataset is a standard benchmark for binary sentiment classification tasks, making it ideal for evaluating the fine-tuned model's performance.  
+
+---
+
+This project integrates the essential components of the PyTorch + Hugging Face ecosystem, specifically:  
+1. **Loading a pre-trained model** and evaluating its baseline performance.  
+2. **Performing parameter-efficient fine-tuning (PEFT)** to adapt the model to a specific task.  
+3. **Conducting inference with the fine-tuned model** and comparing its performance against the original pre-trained model.
