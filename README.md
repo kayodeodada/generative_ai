@@ -1,5 +1,5 @@
 # Project Introduction  
-**Applying Parameter-Efficient Fine-Tuning using the Hugging Face `peft` Library**  
+### Lightweight Fine-Tuning for Sentiment Analysis using GPT-2  
 
 Lightweight fine-tuning is a critical technique for adapting large foundation models to specific tasks without requiring significant computational resources. This project demonstrates how to implement parameter-efficient fine-tuning (PEFT) using the Hugging Face `peft` library, showcasing its efficiency and flexibility.  
 
@@ -10,7 +10,8 @@ Lightweight fine-tuning is a critical technique for adapting large foundation mo
 ---
 
 ## Approach Overview  
-### Lightweight Fine-Tuning for Sentiment Analysis using GPT-2  
+
+**Applying Parameter-Efficient Fine-Tuning using the Hugging Face `peft` Library**  
 
 - **PEFT Technique**  
    The project uses **Low-Rank Adaptation (LoRA)** as the PEFT method. LoRA is chosen for its compatibility with various models and its ability to efficiently adapt foundation models with minimal resource requirements.  
